@@ -1,11 +1,25 @@
 function setup() {
-  createCanvas(800,400);
-  retFixo = createSprite(600,200,50,80);
+  createCanvas(1400,1400);
+  retFixo = createSprite(200,200,50,80);
   retFixo.shapeColor = "green";
   retFixo.debug = true;
-  retMovendo = createSprite(400,800,80,30);
+  retMovendo = createSprite(1200,200,80,30);
   retMovendo.shapeColor = "green";
   retMovendo.debug = true;
+
+  retFixo.velocityX = 4;
+  retFixo.velocityY = 3;
+  retMovendo.velocityX = -5;
+
+  obj1 = createSprite(100,100,50,50);
+  obj1.shapeColor = "green";
+  obj2 = createSprite(200,100,50,50);
+  obj2.shapeColor = "green";
+  obj3 = createSprite(300,100,50,50);
+  obj3.shapeColor = "green";
+  obj4 = createSprite(400,100,50,50);
+  obj4.shapeColor = "green";
+  
 
 }
 
@@ -15,19 +29,18 @@ function draw() {
   retMovendo.x = World.mouseX;
   retMovendo.y = World.mouseY;
 
-  if(retMovendo.x - retFixo.x < retFixo.width/2 + retMovendo.width/2 &&
-    retFixo.x - retMovendo.x < retFixo.width/2 + retMovendo.width/2 &&
-    retMovendo.y - retFixo.y < retFixo.height/2 + retMovendo.height/2 &&
-    retFixo.y - retMovendo.y < retFixo.height/2 + retMovendo.height/2){
-    retFixo.shapeColor = "red";
-    retMovendo.shapeColor = "red";
-  }
-   else {
-    retFixo.shapeColor = "green";
-    retMovendo.shapeColor = "green";
-   }
-
-  console.log(retFixo.x - retMovendo.x);
+  bounceOff(retMovendo,retFixo);
 
   drawSprites();
+
+  if(isTouching(retMovendo,obj2)) {
+    retFixo.velocityX = 0;
+    retFixo.velocityY = 0;
+    obj1.shapeColor = "red";
+    obj2.shapeColor = "purple";
+    obj3.shapeColor = "pink";
+    obj4.shapeColor = "black";
+  }
+  
 }
+
